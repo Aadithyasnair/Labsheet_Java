@@ -15,6 +15,7 @@ public class Largest {
         } else {
             System.out.println("Largest is: " + c);
         }
+    sc.close();
     }
 }
 //2
@@ -29,5 +30,6 @@ public class AreaOfTriangle {
         int height = scanner.nextInt();
         int area = (base * height) / 2;
         System.out.println("Area: " + area);
+        sc.close();
     }
 }

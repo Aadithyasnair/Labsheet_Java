@@ -33,3 +33,131 @@ public class AreaOfTriangle {
         sc.close();
     }
 }
+//Task
+1)	A University wants to develop a an application on  student data. The application should allow:
+1.	Initialise student data using constructor
+2.	Print student information such as name, roll number and cgpa
+class Student {
+    String name;
+    int rollNo;
+    double cgpa;
+    Student()  // default constructor
+    {
+    }
+    Student(String n, int r, double c) { // constructor with parameters
+        name = n;
+        rollNo = r;
+        cgpa = c;
+    }
+
+    // Method to display student details
+    void display() {
+        System.out.println("Student Details:");
+        System.out.println("Name: " + name);
+        System.out.println("Roll Number: " + rollNo);
+        System.out.println("CGPA: " + cgpa);
+    }
+    public static void main(String[] args) {
+        Student s1 = new Student("Akhil",111,7.5);
+        s1.display();
+        Student s2 = new Student("Kaveri",222,6.4);
+        s2.display();
+    }
+}
+===============
+import java.util.Scanner;
+public class Employee{
+  String name;  
+  int empid;
+  double salary,tax;
+ 
+public void readData(){
+  Scanner sc=new Scanner(System.in);
+   System.out.println("enter employee name, id and salary");
+   name=sc.next();
+   empid=sc.nextInt();
+   salary=sc.nextFloat();
+}
+public void calculateTax(){
+    if(salary<=50000)
+      tax=salary*5/100;
+    else
+      tax=salary*7/100;
+}
+public void printData()
+{
+    System.out.println("Employee Details are ");
+    System.out.println("name is  "+name );
+    System.out.println("employee id is "+empid );
+    System.out.println("salary is "+salary );
+    System.out.println("tax is "+tax);
+}
+public static void main(String args[]){
+Employee emp1=new Employee();
+Employee emp2=new Employee();
+emp1.readData();
+emp1.calculateTax();
+emp2.readData();
+emp2.calculateTax();
+emp1.printData();
+emp2.printData();
+}
+}
+Test Case :
+enter employee name, id and salary
+Vishruth
+111
+45000
+enter employee name, id and salary
+Kaveri
+222
+80000
+Employee Details are 
+name is  Vishruth
+employee id is 111
+salary is 45000.0
+tax is 2250.0
+Employee Details are
+name is  Kaveri
+employee id is 222
+salary is 80000.0
+tax is 5600.0
+===================
+// Demo of constructor overloading for Box class
+// Demo of default constructor for Box class
+class Box {
+    double width;
+    double height;
+    double depth;
+    
+    Box(double side)  // single parameter constructor
+     {
+        width=side;
+        height=side;
+        depth=side;
+     }
+    Box(double w, double  h, double  d)  // three parameter constructor
+     {
+        width=w;
+        height=h;
+        depth=d;
+     }
+  
+   void volume()
+   {
+      double vol=width * height * depth;
+    System.out.println("volume is "+vol);
+  }
+  public static void main(String args[]) {
+  
+     Box b1= new Box(5.0); // single parameter constructor is called
+     b1.volume(); 
+     Box b2= new Box(2.0,3.0,4.0); // three parameter constructor is called
+     b2.volume(); 
+} }
+
+Test Case:
+F:\JavaPgms>java Box
+volume is 125.0
+volume is 24.0
+======================

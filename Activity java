@@ -1,0 +1,105 @@
+import java.util.Scanner;
+
+// Class to handle user input
+class GetData {
+    private Scanner scanner = new Scanner(System.in);
+
+    public String getBlock() {
+        System.out.print("Enter block (D/F) or 'exit' to stop: ");
+        return scanner.next().toUpperCase();
+    }
+
+    public void closeScanner() {
+        scanner.close();
+    }
+}
+
+// Class to handle water calculation and refilling logic
+class Calculate {
+    private static final int TANK_CAPACITY = 1000;
+    private static final int REFILL_AMOUNT = 500;
+    private static final int LOW_WATER_THRESHOLD = 200;
+    
+    private int currentWaterLevel = 1000;
+
+    public int getWaterLevel() {
+        return currentWaterLevel;
+    }
+
+    public boolean useWater(String block) {
+        int usage = getWaterUsage(block);
+
+        if (usage > 0) {
+            if (currentWaterLevel >= usage) {
+                currentWaterLevel -= usage;
+                return true;
+            } else {
+                System.out.println("Not enough water for " + block + " block! Refill required.");
+                return false;
+            }
+        } else {
+            System.out.println("Invalid block selected.");
+            return false;
+        }
+    }
+
+    public void refillTank() {
+        if (currentWaterLevel + REFILL_AMOUNT <= TANK_CAPACITY) {
+            currentWaterLevel += REFILL_AMOUNT;
+            System.out.println("Tank refilled with " + REFILL_AMOUNT + "L.");
+        } else {
+            System.out.println("Tank is already full or cannot take a full refill.");
+        }
+    }
+
+    public boolean needsRefill() {
+        return currentWaterLevel < LOW_WATER_THRESHOLD;
+    }
+
+    private int getWaterUsage(String block) {
+        switch (block) {
+            case "D": return 200;
+            case "F": return 100;
+            default: return 0;
+        }
+    }
+}
+
+// Class to display water level and operations
+class Display {
+    public void showWaterLevel(int level) {
+        System.out.println("\nCurrent Water Level: " + level + "L");
+    }
+
+    public void showUsage(String block, int usage, int remaining) {
+        System.out.println(block + " block used " + usage + "L. Remaining water: " + remaining + "L.");
+    }
+}
+
+// Main class to run the program
+public class WaterTankSystem {
+    public static void main(String[] args) {
+        GetData input = new GetData();
+        Calculate tank = new Calculate();
+        Display display = new Display();
+
+        while (true) {
+            display.showWaterLevel(tank.getWaterLevel());
+            String block = input.getBlock();
+
+            if (block.equals("EXIT")) {
+                break;
+            }
+
+            if (tank.useWater(block)) {
+                display.showUsage(block, block.equals("D") ? 200 : 100, tank.getWaterLevel());
+            }
+
+            if (tank.needsRefill()) {
+                tank.refillTank();
+            }
+        }
+
+        input.closeScanner();
+    }
+}
